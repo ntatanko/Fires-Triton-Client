@@ -1,0 +1,48 @@
+{
+    "headers": {
+        "accept": "image/tiff",
+        "content-type": "application/json"
+    },
+    "payload": {
+        "evalscript": "\n    //VERSION=3\n    function setup() {\n        return {\n            input: [{\n                bands: [\"B02\",\"B03\",\"B04\",\"B05\",\"B06\",\"B08\",\"B11\",\"CLP\"],\n                units: \"DN\"\n            }],\n            output: {\n                bands: 8,\n                sampleType: \"UINT16\"\n            }\n        };\n    }\n\n    function evaluatePixel(sample) {\n        return [sample.B02,\n                sample.B03,\n                sample.B04,\n                sample.B05,\n                sample.B06,\n                sample.B08,\n                sample.B11,\n                sample.CLP];\n    }\n",
+        "input": {
+            "bounds": {
+                "bbox": [
+                    30.62273411960653,
+                    56.90753364225304,
+                    30.71565004525816,
+                    56.95833213500569
+                ],
+                "properties": {
+                    "crs": "http://www.opengis.net/def/crs/EPSG/0/4326"
+                }
+            },
+            "data": [
+                {
+                    "dataFilter": {
+                        "mosaickingOrder": "mostRecent",
+                        "timeRange": {
+                            "from": "2020-05-10T00:00:00Z",
+                            "to": "2020-05-10T23:59:59Z"
+                        }
+                    },
+                    "type": "sentinel-2-l1c"
+                }
+            ]
+        },
+        "output": {
+            "height": 546,
+            "responses": [
+                {
+                    "format": {
+                        "type": "image/tiff"
+                    },
+                    "identifier": "default"
+                }
+            ],
+            "width": 585
+        }
+    },
+    "timestamp": "2021-08-31T07:02:45.614069",
+    "url": "https://services.sentinel-hub.com/api/v1/process"
+}

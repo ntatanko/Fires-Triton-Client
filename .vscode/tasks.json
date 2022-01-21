@@ -1,0 +1,34 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "docker-build",
+			"label": "docker-build",
+			"platform": "python",
+			"dockerBuild": {
+				"dockerfile": "${workspaceFolder}/docker/Dockerfile",
+				"context": "${workspaceFolder}",
+				"pull": true
+			}
+		},
+		{
+			"type": "docker-run",
+			"label": "docker-run: debug",
+			"dependsOn": [
+			],
+			"python": {
+				"file": "${relativeFile}"
+			},
+			"dockerRun": {
+				"volumes": [
+					{
+						"localPath": "${workspaceFolder}",
+						"containerPath": "/app"
+					}
+				],
+				"customOptions": "--gpus=all",
+				"remove": true
+			}
+		}
+	]
+}
